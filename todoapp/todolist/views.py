@@ -19,13 +19,13 @@ def add(request):
 
 # update function
 def update(request, todo_id):
-    todo = Todo.object.get(id=todo_id)
+    todo = Todo.objects.get(id=todo_id)
     todo.complete = not todo.complete
     todo.save()
     return redirect("index")
 
 # delete function 
 def delete(request, todo_id):
-    todo = Todo.object.get(id=todo_id)
+    todo = Todo.objects.get(id=todo_id)
     todo.delete()
     return redirect("index")

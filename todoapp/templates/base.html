@@ -10,33 +10,44 @@
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 </head>
 
-<body>
+<body class="ui inverted segment">
     <div style="margin-top: 50px;" class="ui container">
-        <h1 class="ui center aligned header">To Do App</h1>
-
+        <h1 class="ui center aligned header" style="color:white">Task App</h1>
+        
         <form class="ui form" action="/add" method="post">
             {% csrf_token %}
             <div class="field">
-                <label>Todo Title</label>
-                <input type="text" name="title" placeholder="Enter Todo..."><br>
+                <label class="ui header"style="color:white">Task Title</label>
+                <input type="text" name="title" placeholder="Enter Task.."><br>
             </div>
-            <button class="ui blue button" type="submit">Add</button>
+            <div class="ui inverted segment ">
+                <button class="ui inverted blue basic button" type="submit">Add</button>
+            </div>
         </form>
 
         <hr>
 
         {% for todo in todo_list %}
         <div class="ui segment">
-            <p class="ui big header">{{ todo.id }} | {{ todo.title }}</p>
+            <p class="ui big header">{{ todo.title }}</p>
 
             {% if todo.complete == False %}
-            <span class="ui gray label">Not Complete</span>
+            <span class="ui red tag label">unfinshed</span>
             {% else %}
-            <span class="ui green label">Completed</span>
+            <span class="ui teal tag label">Finshed</span>
             {% endif %}
 
-            <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
-            <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+           
+
+            <div class="ui buttons">
+                <button class="ui button" ">
+                    <a href="/delete/{{ todo.id }}">Delete</a>
+                </button>
+                <div class="or"></div>
+                <button class="ui positive button">
+                    <a href="/update/{{ todo.id }}">Update</a>
+                </button>
+            </div>
         </div>
         {% endfor %}
     </div>
